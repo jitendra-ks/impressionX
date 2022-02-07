@@ -3,6 +3,7 @@
 #lock files
 package-lock.*
 yarn.lock.*
+.angular
 
 # dependencies
 /node_modules
