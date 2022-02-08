@@ -21,6 +21,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { ScreenForecastComponent } from './components/screen/screen-forecast/screen-forecast.component';
+import { ChartModule, LineSeriesService } from '@syncfusion/ej2-angular-charts';
+import { HeatMapAllModule } from '@syncfusion/ej2-angular-heatmap';
 
 @NgModule({
     declarations: [
@@ -43,10 +45,13 @@ import { ScreenForecastComponent } from './components/screen/screen-forecast/scr
         MatTableModule,
         MatPaginatorModule,
         HttpClientModule,
-        MatSortModule,MatIconModule, MatListModule, MatMenuModule, MatChipsModule, MatTooltipModule
+        MatSortModule, MatIconModule, MatListModule, MatMenuModule, MatChipsModule, MatTooltipModule,
+        HeatMapAllModule,
+        ChartModule
     ],
     providers: [
-        { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } }
+        { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },
+        LineSeriesService
     ],
     bootstrap: [AppComponent]
 })

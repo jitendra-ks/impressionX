@@ -101,7 +101,11 @@ def get_screen(screenId):
 
         ## prediction data for the current year
         forecast_data = load_and_predict(DATA_PATH + screenId + ".pkl", str(date(date.today().year, 1, 1)), str(date(date.today().year, 12, 31)))
-        res['impPredData'] = forecast_data.values.tolist()
+        values = forecast_data.values.tolist()
+        res['impPredData'] = []
+        axes = ['x', 'y']
+        for value in values:
+            res['impPredData'].append(dict(zip(axes, value)))
         # screen impX data avg over a day per hour
         heat_map_data = generate_heat_map(DATA_PATH + screenId + ".csv")
         res['impHeatMapData'] = heat_map_data.values.tolist()

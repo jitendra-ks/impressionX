@@ -1,1 +1,15 @@
 <p>Selected screen id is: {{screenId}}</p>
+
+
+<div class="container">
+  <ejs-heatmap [dataSource]="dataSource" [xAxis]='xAxis' [yAxis]='yAxis' height="400px" title="Heat Map"></ejs-heatmap>
+</div>
+
+<div class="container" style="padding-top: 100px;">
+  <ejs-chart id="chart-container" [primaryXAxis]='primaryXAxis' [primaryYAxis]='primaryYAxis' [title]='title'>
+    <e-series-collection>
+      <e-series [dataSource]='chartData' type='Line' xName='x' yName='y'></e-series>
+    </e-series-collection>
+  </ejs-chart>
+</div>
+
