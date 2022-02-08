@@ -23,6 +23,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ScreenForecastComponent } from './components/screen/screen-forecast/screen-forecast.component';
 import { ChartModule, LineSeriesService } from '@syncfusion/ej2-angular-charts';
 import { HeatMapAllModule } from '@syncfusion/ej2-angular-heatmap';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
     declarations: [
@@ -47,7 +48,8 @@ import { HeatMapAllModule } from '@syncfusion/ej2-angular-heatmap';
         HttpClientModule,
         MatSortModule, MatIconModule, MatListModule, MatMenuModule, MatChipsModule, MatTooltipModule,
         HeatMapAllModule,
-        ChartModule
+        ChartModule,
+        MatDatepickerModule
     ],
     providers: [
         { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },
