@@ -96,8 +96,3 @@ def predict_for_date(filepath, dateyear):
     fit = sm.load(filepath)
     return fit.predict(dateyear, dynamic=True)
 
-
-if __name__ == "__main__":
-    create_model("screen_data/screen1.csv")    
-    load_and_predict("screen_data/screen1.pkl")
-    data = predict_for_date("screen_data/screen1.pkl", "2022-02-08")
