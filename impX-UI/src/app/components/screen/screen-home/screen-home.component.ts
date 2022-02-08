@@ -40,21 +40,8 @@ export class ScreenHomeComponent implements OnInit {
   }
 
   getAllScreens() {
-    // this.http.get<any>('/getAllScreen', { observe: 'response'}).subscribe((res) => {
-        this.dataSource = new MatTableDataSource([ {
-            "screenId" : "fe:3a:0f:92:89:51",
-            "name" : "SRIB_bangalore_PRD",
-            "publisherId" : "317ab343-ab3e-4bf7-b5c5-0b3df9ffe9fd",
-            "publisherName" : "Smartify Media",
-            "geoLocation" : {
-              "city" : "Acadia Valley",
-              "state" : "AB",
-              "country" : "CAN",
-              "zipCode" : "T0J0A0"
-            },
-            "venueType" : [ ],
-            "status" : 1
-          }]);
+    this.http.get<any>('http://localhost:5000/api/screens/getall', { observe: 'response'}).subscribe((res) => {
+        this.dataSource = new MatTableDataSource(res.body);
         this.dataSource.paginator = this.paginator;
         this.itemCount = this.dataSource.data.length;
         // for column-wise sorting added corresponding fields
@@ -75,9 +62,9 @@ export class ScreenHomeComponent implements OnInit {
                 data.statusText.toString().trim().toLowerCase().includes(filter)
             );
         };
-    // }, (err: HttpErrorResponse) => {
-    //     console.log('exception')
-    // });
+    }, (err: HttpErrorResponse) => {
+        console.log('exception')
+    });
   }
 
 }
