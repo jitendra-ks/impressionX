@@ -33,8 +33,8 @@ def generate_models():
     finally:
         cursor.close()
 
-#with app.app_context(): 
-    #generate_models()
+# with app.app_context(): 
+#     generate_models()
 
 @app.route("/")
 def hello_world():
