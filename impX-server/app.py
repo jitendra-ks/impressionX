@@ -2,7 +2,9 @@ from flask import Flask, jsonify, request
 from flask_mysqldb import MySQL
 import json
 from flask_cors import CORS, cross_origin
-import os
+from create_model import load_and_predict, create_model
+from create_heat_map import generate_heat_map
+from datetime import date
 
 app = Flask(__name__)
 CORS(app)
@@ -13,11 +15,26 @@ app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'root'
 app.config['MYSQL_DB'] = 'dooh'
 
-# Current Dir
-PATH = os.getcwd()
-DATA_PATH = PATH + "/" + "screen_data/"
+DATA_PATH = "screen_data/"
 
 mysql = MySQL(app)
+
+def generate_models():
+    try:
+        cursor = mysql.connection.cursor()
+        cursor.execute('''SELECT ext_screen_id FROM screens  WHERE status != 2''')
+        rows = cursor.fetchall()
+        rows = list(map(list, rows))
+        print(rows)
+        for screenId in rows:
+            create_model(DATA_PATH + screenId[0] + ".csv")
+    except Exception as e:
+        print(e)
+    finally:
+        cursor.close()
+
+#with app.app_context(): 
+    #generate_models()
 
 @app.route("/")
 def hello_world():
@@ -82,15 +99,13 @@ def get_screen(screenId):
         res.pop('currency')
         res['adUnits'] = []
 
+        ## prediction data for the current year
+        forecast_data = load_and_predict(DATA_PATH + screenId + ".pkl", str(date(date.today().year, 1, 1)), str(date(date.today().year, 12, 31)))
+        res['impPredData'] = forecast_data.values.tolist()
+        # screen impX data avg over a day per hour
+        heat_map_data = generate_heat_map(DATA_PATH + screenId + ".csv")
+        res['impHeatMapData'] = heat_map_data.values.tolist()
 
-        ## Added prediction data for 1 year
-        model_path = DATA_PATH + screenId + ".pkl" 
-        from create_model import load_and_predict
-
-        forecast_data = load_and_predict(model_path)
-        print(forecast_data)
-
-       
         resp = jsonify(res)
         resp.status_code = 200
         return resp
@@ -109,4 +124,3 @@ def error_handler(error=None):
     resp.status_code = 404
 
     return resp
-

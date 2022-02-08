@@ -2,6 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import statsmodels.api as sm
 from statsmodels.tsa.api import ExponentialSmoothing
+from datetime import datetime
 
 from datetime import timedelta, date
 
@@ -57,19 +58,19 @@ def create_model(filepath):
     print("Model saved ::")
 
 
-def load_and_predict(filepath):
+def load_and_predict(filepath, start_date, end_date):
     ## Load a model
     fit = sm.load(filepath)
 
-    # forecast till 31Dec 2022
+    # forecast
     forecast = fit.predict(start = 860,
                            end=1224,
                            typ='levels')
 
-
-
-    start_dt = date(year=2022, month=1, day=1)
-    end_dt = date(year=2022, month=12, day=31)
+    dt = datetime.strptime(start_date, "%Y-%m-%d")
+    start_dt = date(year=dt.year, month=dt.month, day=dt.day)
+    dt = datetime.strptime(end_date, "%Y-%m-%d")
+    end_dt = date(year=dt.year, month=dt.month, day=dt.day)
 
     ## Create the date range
     date_list = []
@@ -81,12 +82,10 @@ def load_and_predict(filepath):
     forecast_list = forecast.to_list()
 
     ## Forecast Data frame. -- This can be added to DB
-    finalData = pd.DataFrame(
-        {'DATE': date_list,
+    finalData = pd.DataFrame({
+        'Date': date_list,
         'Impression': forecast_list
     })
-    print(finalData)
-
     return finalData
 
 # This will return impression data for a perticular date
