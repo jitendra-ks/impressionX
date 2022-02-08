@@ -15,7 +15,7 @@ improveathon\Scripts\activate
 pip install -r requirements.txt
 
 ## Start Application
-set FLASK_ENV=development
+set FLASK_ENV=development <br>
 flask run
 
 ----
