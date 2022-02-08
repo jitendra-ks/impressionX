@@ -8,24 +8,13 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 })
 export class AppComponent implements OnInit {
 
-    title = 'improveathon';
-    mainForm!: FormGroup;
-
     constructor(
-        private formBuilder: FormBuilder
     ) {
         
     }
 
     ngOnInit(): void {
 
-        this.mainForm = this.formBuilder.group({
-            first: new FormControl('')
-        })
-
-    }
-
-    submit() {
 
     }
 }
