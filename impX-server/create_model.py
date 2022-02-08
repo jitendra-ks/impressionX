@@ -98,6 +98,6 @@ def predict_for_date(filepath, dateyear):
 
 
 if __name__ == "__main__":
-    create_model("/home/jitendra/myProj/impressionX/impX-server/screen_data/screen1.csv")    
-    load_and_predict("/home/jitendra/myProj/impressionX/impX-server/screen_data/screen1.pkl")
-    data = predict_for_date("/home/jitendra/myProj/impressionX/impX-server/screen_data/screen1.pkl", "2022-02-08")
+    create_model("screen_data/screen1.csv")    
+    load_and_predict("screen_data/screen1.pkl")
+    data = predict_for_date("screen_data/screen1.pkl", "2022-02-08")
