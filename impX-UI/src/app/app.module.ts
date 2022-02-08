@@ -9,10 +9,24 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
+import { ScreenHomeComponent } from './components/screen/screen-home/screen-home.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AppRoutingModule } from './app-routing.module';
+import { ScreenForecastComponent } from './components/screen/screen-forecast/screen-forecast.component';
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        ScreenHomeComponent,
+        ScreenForecastComponent
     ],
     imports: [
         BrowserModule,
@@ -20,11 +34,16 @@ import { MatSelectModule } from '@angular/material/select';
         MatFormFieldModule,
         FormsModule,
         ReactiveFormsModule,
+        AppRoutingModule,
         MatButtonModule,
         MatButtonToggleModule,
         MatInputModule,
         MatRadioModule,
-        MatSelectModule
+        MatSelectModule,
+        MatTableModule,
+        MatPaginatorModule,
+        HttpClientModule,
+        MatSortModule,MatIconModule, MatListModule, MatMenuModule, MatChipsModule, MatTooltipModule
     ],
     providers: [
         { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } }
