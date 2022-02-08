@@ -4,8 +4,7 @@ import seaborn as sns
 
 def generate_heat_map(filepath):
     df = pd.read_csv(filepath)
-    # Drop ID column
-    df = df.drop("ID", axis=1)
+
 
     # Converting Datetime to datetime format
     df['date'] = pd.to_datetime(df['Datetime'])
@@ -29,12 +28,11 @@ def generate_heat_map(filepath):
     hour_weekday = df.pivot_table(values='Count', index='weekday', columns = 'hour', aggfunc = 'mean')
 
     #plotting a heatmap with a colorbar; the colorbar shows the energy consumption in MWH
-    
-    _ = plt.figure(figsize=(12, 8))
-    ax = sns.heatmap(hour_weekday.sort_index(ascending = False), cmap='viridis')
+
+    #_ = plt.figure(figsize=(12, 8))
+    #ax = sns.heatmap(hour_weekday.sort_index(ascending = False), cmap='viridis')
     #_ = plt.title('Average energy consumption in MWH for each hour of each weekday over the entire period')
-    _ = ax.set_title("Average impression each hour of each weekday averaged over years", fontsize = 14)
+    #_ = ax.set_title("Average impression each hour of each weekday averaged over years", fontsize = 14)
 
+    return hour_weekday
 
-if __name__ == "__main__":
-    generate_heat_map("screen_data/screen1.csv")
