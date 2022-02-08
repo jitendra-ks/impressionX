@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 def generate_heat_map(filepath):
     df = pd.read_csv(filepath)
@@ -28,7 +29,7 @@ def generate_heat_map(filepath):
     hour_weekday = df.pivot_table(values='Count', index='weekday', columns = 'hour', aggfunc = 'mean')
 
     #plotting a heatmap with a colorbar; the colorbar shows the energy consumption in MWH
-    import seaborn as sns
+    
     _ = plt.figure(figsize=(12, 8))
     ax = sns.heatmap(hour_weekday.sort_index(ascending = False), cmap='viridis')
     #_ = plt.title('Average energy consumption in MWH for each hour of each weekday over the entire period')
@@ -36,4 +37,4 @@ def generate_heat_map(filepath):
 
 
 if __name__ == "__main__":
-    generate_heat_map("/home/jitendra/myProj/impressionX/impX-server/screen_data/screen1.csv")
+    generate_heat_map("screen_data/screen1.csv")
