@@ -8,6 +8,7 @@ def generate_heat_map(filepath):
     # Drop ID column
     df = df.drop("ID", axis=1)
 
+
     # Converting Datetime to datetime format
     df['date'] = pd.to_datetime(df['Datetime'])
 

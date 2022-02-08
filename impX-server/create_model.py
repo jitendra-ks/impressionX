@@ -15,31 +15,29 @@ def daterange(date1, date2):
 
 # This API required to create the model and save
 def create_model(filepath):
-    
+
     # Read the file and create dataframe
     df = pd.read_csv(filepath)
-    # Drop ID column
-    df = df.drop("ID", axis=1)
 
     # Converting Datetime to datetime format
     df['date'] = pd.to_datetime(df['Datetime'])
     # set date as index column
     df.set_index('date', inplace=True)
 
-    #Creating train and test set 
+    #Creating train and test set
     #Index
-    train=df[0:15000] 
+    train=df[0:15000]
     test=df[15000:]
 
     #Aggregating the dataset at daily level
-    df.Timestamp = pd.to_datetime(df.Datetime,format='%d-%m-%Y %H:%M') 
-    df.index = df.Timestamp 
+    df.Timestamp = pd.to_datetime(df.Datetime,format='%d-%m-%Y %H:%M')
+    df.index = df.Timestamp
     df = df.resample('D').mean()
-    train.Timestamp = pd.to_datetime(train.Datetime,format='%d-%m-%Y %H:%M') 
-    train.index = train.Timestamp 
-    train = train.resample('D').mean() 
-    test.Timestamp = pd.to_datetime(test.Datetime,format='%d-%m-%Y %H:%M') 
-    test.index = test.Timestamp 
+    train.Timestamp = pd.to_datetime(train.Datetime,format='%d-%m-%Y %H:%M')
+    train.index = train.Timestamp
+    train = train.resample('D').mean()
+    test.Timestamp = pd.to_datetime(test.Datetime,format='%d-%m-%Y %H:%M')
+    test.index = test.Timestamp
     test = test.resample('D').mean()
 
 
@@ -78,7 +76,7 @@ def load_and_predict(filepath, start_date, end_date):
     date_list = []
     for dt in daterange(start_dt, end_dt):
         date_list.append(dt.strftime("%Y-%m-%d"))
-	
+
 
     # Convert forecast to List
     forecast_list = forecast.to_list()
