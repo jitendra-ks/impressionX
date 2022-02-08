@@ -1,8 +1,10 @@
 from flask import Flask, jsonify, request
 from flask_mysqldb import MySQL
 import json
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
+CORS(app)
 
 # todo: read from config or .env file
 app.config['MYSQL_HOST'] = 'localhost'
@@ -17,6 +19,7 @@ def hello_world():
     return '<p>impressionX</p>'
 
 @app.route("/api/screens/getall", methods=["GET"])
+@cross_origin()
 def get_all_screens():
     try:
         cursor = mysql.connection.cursor()
@@ -38,6 +41,7 @@ def get_all_screens():
         cursor.close()
 
 @app.route("/api/screens/get/<string:screenId>", methods=["GET"])
+@cross_origin()
 def get_screen(screenId):
     try:
         cursor = mysql.connection.cursor()
